@@ -3,7 +3,7 @@ let input = document.getElementById('shift')
 let plaintext = document.getElementById('plaintext')
 let encryptedText = document.getElementById('encryptedText')
 
-button.addEventListener('click', function () {
+button.addEventListener('click', function (event) {
     event.preventDefault()
     console.log('Shift value',input.value,'and plaintext entered:',plaintext.value)
     let output = shiftText(plaintext.value, parseInt(input.value))
@@ -26,6 +26,7 @@ function shiftLetter(letter,shift){
 }
 
 function shiftText(text,shift){
+    shift = ((shift%26) + 26)%26
     let newText = ''
     for(let i=0;i<text.length;i++){
         newText = newText + shiftLetter(text[i],shift)
