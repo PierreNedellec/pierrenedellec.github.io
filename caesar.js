@@ -5,6 +5,9 @@ let encryptedText = document.getElementById('encryptedText')
 
 button.addEventListener('click', function (event) {
     event.preventDefault()
+    if (input.value === ""){
+        input.value = 0
+    }
     let output = shiftText(plaintext.value, parseInt(input.value))
     encryptedText.textContent = output
 });
