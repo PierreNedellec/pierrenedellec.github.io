@@ -5,11 +5,13 @@ let encryptedText = document.getElementById('encryptedText')
 
 button.addEventListener('click', function (event) {
     event.preventDefault()
-    console.log('Shift value',input.value,'and plaintext entered:',plaintext.value)
     let output = shiftText(plaintext.value, parseInt(input.value))
-    console.log(output)
     encryptedText.textContent = output
 });
+
+
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 function shiftLetter(letter,shift){
     letter = letter.toUpperCase()
