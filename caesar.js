@@ -1,16 +1,17 @@
-let button = document.getElementById('encryptButton')
+let encryptButton = document.getElementById('encryptButton')
 let input = document.getElementById('shift')
 let plaintext = document.getElementById('plaintext')
 let encryptedText = document.getElementById('encryptedText')
+let copyEncryptedMessageButton = document.getElementById('copyEncryptedMessageButton')
 
-button.addEventListener('click', function (event) {
+encryptButton.addEventListener('click', function (event) {
     event.preventDefault()
     if (input.value === ""){
         input.value = 0
     }
     let output = shiftText(plaintext.value, parseInt(input.value))
     encryptedText.textContent = output
-});
+})
 
 
 
@@ -19,7 +20,6 @@ const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 function shiftLetter(letter,shift){
     letter = letter.toUpperCase()
     console.log('letter input',letter)
-    let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     if (alphabet.indexOf(letter) === -1){
         return letter
     }
@@ -37,6 +37,10 @@ function shiftText(text,shift){
         newText = newText + shiftLetter(text[i],shift)
     }
     return newText
-
 }
 
+copyEncryptedMessageButton.addEventListener('click', function(event){
+    event.preventDefault()
+    let output = shiftText(plaintext.value, parseInt(input.value))
+    navigator.clipboard.writeText(output)
+});
