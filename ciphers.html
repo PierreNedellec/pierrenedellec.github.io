@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to <i>Enigman</i></title>
+  <title>Encryption</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
@@ -12,8 +12,32 @@
     <div class="container" style="background-color: #eee7c3;">
         <h1 class="text-center">Cipher encryption</h1>
         <div class="row">
-            <div class="col text-center border-start border-2 border-dark">Cipher seclection, description</div>
-            <div class="col text-center border-end border-start border-2 border-dark">Input/Output</div>
+            <div class="col border-start border-2 border-dark">
+                <h2 class="text-center">Cipher seclection, description</h2>
+                <br>
+                <span>Select cipher:</span>
+                <select id="cipherSelect">
+                    <option>Caesar</option>
+                    <option>Vigenere</option>
+                    <option>Permutation</option>
+                </select>
+            </div>
+
+            <div class="col  border-end border-start border-2 border-dark">
+                <h2 class="text-center">Input/Output</h2>
+                <br>
+                <div class="cipher-input cipher-caesar">
+                    <span>Enter shift: </span>
+                    <input type="number"></input>
+                </div>
+                <p>Enter your <i>unencrypted</i> message here.</p>
+                <textarea style="width:32rem;height:6rem">Unencrypted message</textarea>
+                <button>Encrypt</button>
+                <hr>
+                <p>Copy your encrypted message from below:</p>
+                <textarea readonly style="width:32rem;height:6rem">Encrypted message appears here.</textarea>
+                <button>Copy to clipboard</button>
+            </div>
         </div>
     </div>
 </body>
