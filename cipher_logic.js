@@ -52,36 +52,55 @@ function raiseError(error){
     const possibleErrors = {
         "noError": "",
         "vigenereKeywordMustBeAllLetters": "Please enter a keyword with only letters, no numbers or spaces.",
-        "caesarShiftUnder26": "Please enter a shift between 0 and 25 inclusive."
+        "caesarShiftUnder26": "Please enter a shift between 0 and 25 inclusive.",
+        "caesarShiftMustBeInteger": "Please enter an integer shift."
     }
     errorMessage.textContent = possibleErrors[error]
-    console.log(errorMessage.value)
+    console.log("Error: ",errorMessage.value)
 
 }
 
 
 //CAESAR CIPHER
 function caesarEncrypt(){
-    const caesarInput = document.getElementById("caesarShift")
-    const caesarShift = ((Number(caesarInput.value)%26)+26)%26
-    let newText = ""
-    for (letter of plaintext.value.toUpperCase()){
-        if (alphabet.indexOf(letter) === -1){
-            newText += letter
+    if (checkCaesarShift()){
+        const caesarInput = document.getElementById("caesarShift")
+        const caesarShift = ((Number(caesarInput.value)%26)+26)%26
+        let newText = ""
+        for (letter of plaintext.value.toUpperCase()){
+            if (alphabet.indexOf(letter) === -1){
+                newText += letter
+            }
+            else{
+                newText += caesarShiftLetter(letter,caesarShift)
+            }
         }
-        else{
-            newText += caesarShiftLetter(letter,caesarShift)
-
-        }
+        return newText
     }
-    return newText
-
+    else {
+        return ''
+    }
 }
 
 function caesarShiftLetter(letter,shift){
     let previousIndex = alphabet.indexOf(letter)
     let newIndex = (previousIndex + shift)%26
     return alphabet[newIndex]
+}
+
+function checkCaesarShift(){
+    const caesarInput = document.getElementById("caesarShift")
+    const caesarShift = Number(caesarInput.value)
+    if (caesarShift < 0 || caesarShift > 25){
+        console.log('Shift:',caesarShift,(caesarShift < 0),(caesarShift > 25))
+        raiseError("caesarShiftUnder26")
+        return false
+    }
+    if (!Number.isInteger(caesarShift)){
+        raiseError("caesarShiftMustBeInteger")
+        return false
+    }
+    return true
 }
 
 //VIGENERE
@@ -118,8 +137,9 @@ function vigenereEncrypt(){
 
         }
         return newText
-
     }
-    
+    else{
+        return ''
+    }
 }
 
