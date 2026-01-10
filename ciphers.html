@@ -6,6 +6,7 @@
   <title>Encryption</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="cipher_logic.js"></script>
 </head>
 
 <body>
@@ -15,8 +16,9 @@
             <div class="col border-start border-2 border-dark">
                 <h2 class="text-center">Cipher seclection, description</h2>
                 <br>
-                <span>Select cipher:</span>
+                <span>Encryption cipher:</span>
                 <select id="cipherSelect">
+                    <option>Select cipher</option>
                     <option>Caesar</option>
                     <option>Vigenere</option>
                     <option>Permutation</option>
@@ -27,8 +29,16 @@
                 <h2 class="text-center">Input/Output</h2>
                 <br>
                 <div class="cipher-input cipher-caesar">
-                    <span>Enter shift: </span>
-                    <input type="number"></input>
+                    <span>Enter Caesar shift: </span>
+                    <input type="number">
+                </div>
+                <div class="cipher-input cipher-vigenere">
+                    <span>Enter Vigenère keyword: </span>
+                    <input type="text">
+                </div>
+                <div class="cipher-input cipher-permutation">
+                    <span>Enter permutation (keyword or permutation code): </span>
+                    <input type="text">
                 </div>
                 <p>Enter your <i>unencrypted</i> message here.</p>
                 <textarea style="width:32rem;height:6rem">Unencrypted message</textarea>
