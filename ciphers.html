@@ -31,22 +31,22 @@
                 <br>
                 <div class="cipher-input cipher-caesar">
                     <span>Enter Caesar shift: </span>
-                    <input type="number">
+                    <input id="caesarShift" type="number">
                 </div>
                 <div class="cipher-input cipher-vigenere">
                     <span>Enter Vigenère keyword: </span>
-                    <input type="text">
+                    <input id="vigenereKeyword" type="text">
                 </div>
                 <div class="cipher-input cipher-permutation">
                     <span>Enter permutation (keyword or permutation code): </span>
-                    <input type="text">
+                    <input id="permutation" type="text">
                 </div>
                 <p>Enter your <i>unencrypted</i> message here.</p>
-                <textarea style="width:32rem;height:6rem">Unencrypted message</textarea>
-                <button>Encrypt</button>
+                <textarea id="plaintext" style="width:32rem;height:6rem">Unencrypted message</textarea>
+                <button id="encryptButton">Encrypt</button>
                 <hr>
                 <p>Copy your encrypted message from below:</p>
-                <textarea readonly style="width:32rem;height:6rem">Encrypted message appears here.</textarea>
+                <textarea id="ciphertext" readonly style="width:32rem;height:6rem">Encrypted message appears here.</textarea>
                 <button>Copy to clipboard</button>
             </div>
         </div>
