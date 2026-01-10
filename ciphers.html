@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Encryption</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script src="cipher_logic.js"></script>
 </head>
 
 <body>
@@ -18,11 +16,14 @@
                 <br>
                 <span>Encryption cipher:</span>
                 <select id="cipherSelect">
-                    <option>Select cipher</option>
-                    <option>Caesar</option>
-                    <option>Vigenere</option>
-                    <option>Permutation</option>
+                    <option value="">Select cipher</option>
+                    <option value="caesar">Caesar</option>
+                    <option value="vigenere">Vigenère</option>
+                    <option value="permutation">Permutation</option>
                 </select>
+                <div id="cipherDescription">
+
+                </div>
             </div>
 
             <div class="col  border-end border-start border-2 border-dark">
@@ -50,4 +51,5 @@
             </div>
         </div>
     </div>
+    <script src="cipher_logic.js"></script>
 </body>
