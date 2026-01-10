@@ -1,8 +1,9 @@
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const allCipherParameters = document.getElementsByClassName("cipher-input")
 const cipherSelecter = document.getElementById("cipherSelect")
 const plaintext = document.getElementById("plaintext")
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-let ciphertextTextarea = document.getElementById("ciphertext")
+const sanitisedPlaintext = sanitisePlaintext()
+const ciphertextTextarea = document.getElementById("ciphertext")
 const encryptButton = document.getElementById("encryptButton")
 
 updateInputs()
@@ -17,10 +18,13 @@ function updateInputs(){
 
     if (input.classList.contains("cipher-"+selectedCipher)){
         input.style.display = "block"
+
+    raiseError("noError")
     }
 }}
 
 function computeCiphertext(){
+    raiseError("noError")
     const encryptors = {
         caesar: caesarEncrypt,
         vigenere: vigenereEncrypt,
@@ -32,7 +36,28 @@ function computeCiphertext(){
     let ciphertext = encryptFunction()
     ciphertextTextarea.value = ciphertext
 }
+function sanitisePlaintext(){
+    let newText = ""
+    const upperPlaintext = plaintext.value.toUpperCase()
+    for (letter of upperPlaintext){
+        if (alphabet.indexOf(letter) !== -1){
+            newText += letter
+        }
+    }
+    return newText
+}
 
+function raiseError(error){
+    const errorMessage = document.getElementById("errorMessage")
+    const possibleErrors = {
+        "noError": "",
+        "vigenereKeywordMustBeAllLetters": "Please enter a keyword with only letters, no numbers or spaces.",
+        "caesarShiftUnder26": "Please enter a shift between 0 and 25 inclusive."
+    }
+    errorMessage.textContent = possibleErrors[error]
+    console.log(errorMessage.value)
+
+}
 
 
 //CAESAR CIPHER
@@ -61,23 +86,40 @@ function caesarShiftLetter(letter,shift){
 
 //VIGENERE
 
-function vigenereEncrypt(){
+function checkVigenereKeywordIsAllLetters(){
     const vigenereInput = document.getElementById("vigenereKeyword")
     const vigenereKeyword = vigenereInput.value.toUpperCase()
-    const upperPlaintext = plaintext.value.toUpperCase()
-    const keywordLength = vigenereKeyword.length
-    let newText = ""
-    for (i in upperPlaintext){
-        let letter = upperPlaintext[i]
-        if (alphabet.indexOf(letter) === -1){
-            newText += letter
+    for (char of vigenereKeyword){
+        if (alphabet.indexOf(char) === -1){
+            raiseError("vigenereKeywordMustBeAllLetters")
+            return false
         }
-        else{
-            let shift = alphabet.indexOf(vigenereKeyword[i%(keywordLength)])
-            let newIndex = (alphabet.indexOf(upperPlaintext[i]) + shift)%26
-            newText += alphabet[newIndex]
+    }
+    return true
+}
+
+
+function vigenereEncrypt(){
+    if (checkVigenereKeywordIsAllLetters()){
+        const vigenereInput = document.getElementById("vigenereKeyword")
+        const vigenereKeyword = vigenereInput.value.toUpperCase()
+        const keywordLength = vigenereKeyword.length
+        let newText = ""
+        for (i in sanitisedPlaintext){
+            let letter = sanitisedPlaintext[i]
+            if (alphabet.indexOf(letter) === -1){
+                newText += letter
+            }
+            else{
+                let shift = alphabet.indexOf(vigenereKeyword[i%(keywordLength)])
+                let newIndex = (alphabet.indexOf(sanitisedPlaintext[i]) + shift)%26
+                newText += alphabet[newIndex]
+            }
+
         }
+        return newText
 
     }
-    return newText
+    
 }
+
