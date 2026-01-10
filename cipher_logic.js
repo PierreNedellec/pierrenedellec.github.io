@@ -22,13 +22,14 @@ function updateInputs(){
 
 function computeCiphertext(){
     const encryptors = {
-        caesar: caesarEncrypt
-        //vigenere: vigenereEncrypt
+        caesar: caesarEncrypt,
+        vigenere: vigenereEncrypt,
         //permutation: permutationEncrypt
 }
-    const selectedCipher = cipherSelecter.value
-    const encryptFunction = encryptors[selectedCipher]
-    const ciphertext = encryptFunction()
+    let selectedCipher = cipherSelecter.value
+    console.log('selected',selectedCipher)
+    let encryptFunction = encryptors[selectedCipher]
+    let ciphertext = encryptFunction()
     ciphertextTextarea.value = ciphertext
 }
 
@@ -56,4 +57,27 @@ function caesarShiftLetter(letter,shift){
     let previousIndex = alphabet.indexOf(letter)
     let newIndex = (previousIndex + shift)%26
     return alphabet[newIndex]
+}
+
+//VIGENERE
+
+function vigenereEncrypt(){
+    const vigenereInput = document.getElementById("vigenereKeyword")
+    const vigenereKeyword = vigenereInput.value.toUpperCase()
+    const upperPlaintext = plaintext.value.toUpperCase()
+    const keywordLength = vigenereKeyword.length
+    let newText = ""
+    for (i in upperPlaintext){
+        let letter = upperPlaintext[i]
+        if (alphabet.indexOf(letter) === -1){
+            newText += letter
+        }
+        else{
+            let shift = alphabet.indexOf(vigenereKeyword[i%(keywordLength)])
+            let newIndex = (alphabet.indexOf(upperPlaintext[i]) + shift)%26
+            newText += alphabet[newIndex]
+        }
+
+    }
+    return newText
 }
