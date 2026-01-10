@@ -69,7 +69,7 @@ function caesarEncrypt(){
         let newText = ""
         for (letter of plaintext.value.toUpperCase()){
             if (alphabet.indexOf(letter) === -1){
-                newText += letter
+                newText += ''
             }
             else{
                 newText += caesarShiftLetter(letter,caesarShift)
