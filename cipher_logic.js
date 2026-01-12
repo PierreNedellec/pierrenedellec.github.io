@@ -2,7 +2,6 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const allCipherParameters = document.getElementsByClassName("cipher-input")
 const cipherSelecter = document.getElementById("cipherSelect")
 const plaintext = document.getElementById("plaintext")
-const sanitisedPlaintext = sanitisePlaintext()
 const ciphertextTextarea = document.getElementById("ciphertext")
 const encryptButton = document.getElementById("encryptButton")
 
@@ -28,7 +27,7 @@ function computeCiphertext(){
     const encryptors = {
         caesar: caesarEncrypt,
         vigenere: vigenereEncrypt,
-        //permutation: permutationEncrypt
+        permutation: permutationEncrypt
 }
     let selectedCipher = cipherSelecter.value
     console.log('selected',selectedCipher)
@@ -44,6 +43,7 @@ function sanitisePlaintext(){
             newText += letter
         }
     }
+    console.log('sanitised text,',newText)
     return newText
 }
 
@@ -92,7 +92,6 @@ function checkCaesarShift(){
     const caesarInput = document.getElementById("caesarShift")
     const caesarShift = Number(caesarInput.value)
     if (caesarShift < 0 || caesarShift > 25){
-        console.log('Shift:',caesarShift,(caesarShift < 0),(caesarShift > 25))
         raiseError("caesarShiftUnder26")
         return false
     }
@@ -120,6 +119,7 @@ function checkVigenereKeywordIsAllLetters(){
 
 function vigenereEncrypt(){
     if (checkVigenereKeywordIsAllLetters()){
+        const sanitisedPlaintext = sanitisePlaintext()
         const vigenereInput = document.getElementById("vigenereKeyword")
         const vigenereKeyword = vigenereInput.value.toUpperCase()
         const keywordLength = vigenereKeyword.length
@@ -141,5 +141,41 @@ function vigenereEncrypt(){
     else{
         return ''
     }
+}
+
+//PERMUTATION
+
+function permutationEncrypt(){
+    const permutationKeyword = document.getElementById("permutation")
+    const permuationKeyNumbers = keywordToKey(permutationKeyword)
+    const keySize = permuationKeyNumbers.length
+    const sanitisedPlaintext = padPlaintext(sanitisePlaintext(),keySize)
+    let plaintextListedCharacters = sanitisedPlaintext.split("")
+    const totalNumberOfBlocks = (sanitisedPlaintext.length/keySize)
+    let newText = ""
+    let originalBlock = []
+    let newBlock = Array(keySize)
+    for (let i=0; i<totalNumberOfBlocks;i++){
+        originalBlock = plaintextListedCharacters.splice(0,keySize)
+        for (position in originalBlock){
+            newBlock[permuationKeyNumbers[position]] = originalBlock[position]
+        }
+        newText += newBlock.join("")
+    }
+    return newText
+}
+
+function keywordToKey(keyword){
+    return keyword.value.split("")
+}
+
+function padPlaintext(text,blockSize){
+    while (text.length < 10000000) {
+        if (text.length%blockSize === 0){
+            return text
+            }
+        text += "X"
+    }
+
 }
 
