@@ -53,7 +53,8 @@ function raiseError(error){
         "noError": "",
         "vigenereKeywordMustBeAllLetters": "Please enter a keyword with only letters, no numbers or spaces.",
         "caesarShiftUnder26": "Please enter a shift between 0 and 25 inclusive.",
-        "caesarShiftMustBeInteger": "Please enter an integer shift."
+        "caesarShiftMustBeInteger": "Please enter an integer shift.",
+        "duplicateLettersInPermutationCode": "Please note: Your keyword has duplicate letters. Only the first instance has been kept."
     }
     errorMessage.textContent = possibleErrors[error]
     console.log("Error: ",errorMessage.value)
@@ -165,8 +166,33 @@ function permutationEncrypt(){
     return newText
 }
 
+function removeDoubleLetters(keyword){
+    if ([...new Set(keyword)].length < keyword.length){
+        raiseError("duplicateLettersInPermutationCode")
+    }
+    return [...new Set(keyword)].join("")
+}
+
 function keywordToKey(keyword){
-    return keyword.value.split("")
+    let keyLetters = keyword.value.toUpperCase().split("")
+    keyLetters = removeDoubleLetters(keyLetters)
+    let keyInIndexes = []
+    let keyInPermutationCode = Array(keyLetters.length)
+    console.log('Transformed key:',keyLetters)
+    for (letter of keyLetters){
+        keyInIndexes.push(alphabet.indexOf(letter))
+    }
+    console.log('keyInIndexes',keyInIndexes)
+
+    for (i in keyLetters){
+        let lowestValue = Math.min(...keyInIndexes)
+        console.log('LowestValue',lowestValue)
+        keyInPermutationCode[keyInIndexes.indexOf(lowestValue)] = i
+        keyInIndexes[keyInIndexes.indexOf(lowestValue)] = 1000
+        console.log('Resultant keyInIndexes',keyInIndexes)
+    }
+    console.log('Permutation',keyInPermutationCode)
+    return keyInPermutationCode
 }
 
 function padPlaintext(text,blockSize){
