@@ -54,7 +54,8 @@ function raiseError(error){
         "vigenereKeywordMustBeAllLetters": "Please enter a keyword with only letters, no numbers or spaces.",
         "caesarShiftUnder26": "Please enter a shift between 0 and 25 inclusive.",
         "caesarShiftMustBeInteger": "Please enter an integer shift.",
-        "duplicateLettersInPermutationCode": "Please note: Your keyword has duplicate letters. Only the first instance has been kept."
+        "duplicateLettersInPermutationCode": "Please note: Your keyword has duplicate letters. Only the first instance has been kept.",
+        "permutationKeywordMustBeAllLetters": "Keyword must only have letters, no numbers or spaces."
     }
     errorMessage.textContent = possibleErrors[error]
     console.log("Error: ",errorMessage.value)
@@ -148,22 +149,39 @@ function vigenereEncrypt(){
 
 function permutationEncrypt(){
     const permutationKeyword = document.getElementById("permutation")
-    const permuationKeyNumbers = keywordToKey(permutationKeyword)
-    const keySize = permuationKeyNumbers.length
-    const sanitisedPlaintext = padPlaintext(sanitisePlaintext(),keySize)
-    let plaintextListedCharacters = sanitisedPlaintext.split("")
-    const totalNumberOfBlocks = (sanitisedPlaintext.length/keySize)
-    let newText = ""
-    let originalBlock = []
-    let newBlock = Array(keySize)
-    for (let i=0; i<totalNumberOfBlocks;i++){
-        originalBlock = plaintextListedCharacters.splice(0,keySize)
-        for (position in originalBlock){
-            newBlock[permuationKeyNumbers[position]] = originalBlock[position]
+    if (validatePermutationKeyword(permutationKeyword)){
+           const permuationKeyNumbers = keywordToKey(permutationKeyword)
+        const keySize = permuationKeyNumbers.length
+        const sanitisedPlaintext = padPlaintext(sanitisePlaintext(),keySize)
+        let plaintextListedCharacters = sanitisedPlaintext.split("")
+        const totalNumberOfBlocks = (sanitisedPlaintext.length/keySize)
+        let newText = ""
+        let originalBlock = []
+        let newBlock = Array(keySize)
+        for (let i=0; i<totalNumberOfBlocks;i++){
+            originalBlock = plaintextListedCharacters.splice(0,keySize)
+            for (position in originalBlock){
+                newBlock[permuationKeyNumbers[position]] = originalBlock[position]
+            }
+            newText += newBlock.join("")
         }
-        newText += newBlock.join("")
+        return newText
     }
-    return newText
+    return 'Error'
+ 
+}
+
+function validatePermutationKeyword(keyword){
+    keyword = keyword.value.toUpperCase()
+    for (letter of keyword){
+        console.log("Checking character",letter)
+        if (alphabet.indexOf(letter)=== -1){
+            raiseError("permutationKeywordMustBeAllLetters")
+            return false
+        }
+    console.log("Validate keyword: PASS:",keyword)
+    return true
+    }
 }
 
 function removeDoubleLetters(keyword){
