@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Progress...</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="page-header text-center">
+            <h1>
+                Lesson progress
+            </h1>
+        </div>
+        <div id="inputs" class="text-center">
+            <p>
+                When did your lesson start?
+            </p>
+            <input id="starttime" type="time">
+            <p>
+                When will your lesson end?
+            </p>
+            <input id="endtime" type="time">
+            <button id="calculatebutton">Calcuate!</button>
+        </div>
+            <div class="progress" style="height: 40px; ">
+            <div id="progressbar" class="progress-bar" style="width: 10%; background-color: green;"></div>
+        </div>
+    </div>
+    <script src="lesson_progress.js"></script>
+</body>
+</html>
