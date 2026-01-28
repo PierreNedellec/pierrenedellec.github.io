@@ -4,7 +4,11 @@ const endTime = document.getElementById('endtime')
 const calculateButton = document.getElementById('calculatebutton')
 const progressBar = document.getElementById('progressbar')
 
-calculateButton.addEventListener("click",updateProgressBar)
+calculateButton.addEventListener("click",startTicking)
+
+function startTicking(){
+    setInterval(updateProgressBar,1000)
+}
 
 function timeToMinutes(time) {
     console.log('Tried to convert:',time)
