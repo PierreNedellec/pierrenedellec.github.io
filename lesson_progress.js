@@ -7,7 +7,8 @@ const progressBar = document.getElementById('progressbar')
 calculateButton.addEventListener("click",startTicking)
 
 function startTicking(){
-    setInterval(updateProgressBar,1000)
+    updateProgressBar()
+    window.intervalID = setInterval(updateProgressBar,1000)
 }
 
 function timeToMinutes(time) {
@@ -17,7 +18,14 @@ function timeToMinutes(time) {
 }
 
 function updateProgressBar(){
-    percentageProgress = Math.round(percentageCompleted()) + "%"
+    const error = validateData()
+    console.log('Error:',error)
+    if (error){
+        alert(error);
+        clearInterval(intervalID);
+        return;
+    }
+    percentageProgress = percentageCompleted() + "%"
     console.log('Percentage calculated:',percentageProgress)
     progressBar.style.width = percentageProgress
 }
@@ -31,4 +39,11 @@ function percentageCompleted(){
     totalLessonLength = timeToMinutes(endTime.value) - timeToMinutes(startTime.value)
     timeElapsed = currentTime() - timeToMinutes(startTime.value)
     return (timeElapsed/totalLessonLength * 100)
+}
+
+function validateData(){
+    if (timeToMinutes(endTime.value)<timeToMinutes(startTime.value)) return "End time must be after the start time";
+    if (timeToMinutes(endTime.value)===timeToMinutes(startTime.value)) return "The start and end cannot be at the same time.";
+    if (Number.isNaN(timeToMinutes(endTime.value)) || Number.isNaN(timeToMinutes(startTime.value))) return "Both the start and end time must be defined.";
+    return null;
 }
