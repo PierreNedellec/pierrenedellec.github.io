@@ -179,9 +179,10 @@ function validatePermutationKeyword(keyword){
             raiseError("permutationKeywordMustBeAllLetters")
             return false
         }
+    }
     console.log("Validate keyword: PASS:",keyword)
     return true
-    }
+    
 }
 
 function removeDoubleLetters(keyword){
