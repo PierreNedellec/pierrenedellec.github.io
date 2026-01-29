@@ -3,10 +3,28 @@ const startTime = document.getElementById('starttime')
 const endTime = document.getElementById('endtime')
 const calculateButton = document.getElementById('calculatebutton')
 const progressBar = document.getElementById('progressbar')
+const progressStart = document.getElementById('progressstart')
+const progressEnd = document.getElementById('progressend')
 
 calculateButton.addEventListener("click",startTicking)
+startTime.addEventListener("change", stopTicking)
+endTime.addEventListener("change", stopTicking)
+
+stopTicking()
+
+function stopTicking(){
+    clearInterval(intervalID)
+    changeBarColor("grey")
+}
+
+function changeBarColor(color){
+    progressBar.style.backgroundColor = color;
+}
 
 function startTicking(){
+    progressStart.textContent = startTime.value
+    progressEnd.textContent = endTime.value
+    changeBarColor("blue")
     updateProgressBar()
     window.intervalID = setInterval(updateProgressBar,1000)
 }
@@ -22,7 +40,7 @@ function updateProgressBar(){
     console.log('Error:',error)
     if (error){
         alert(error);
-        clearInterval(intervalID);
+        stopTicking();
         return;
     }
     percentageProgress = percentageCompleted() + "%"

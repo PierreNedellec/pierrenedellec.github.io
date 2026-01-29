@@ -24,10 +24,17 @@
                 When will your lesson end?
             </p>
             <input id="endtime" type="time">
-            <button id="calculatebutton">Calcuate!</button>
+            <div class="mb-3"></div>
+            <button id="calculatebutton" style="background-color: paleturquoise;" class="btn btn-lg">Calcuate!</button>
         </div>
-            <div class="progress" style="height: 40px; ">
-            <div id="progressbar" class="progress-bar" style="width: 10%; background-color: green;"></div>
+        <div class="mb-5"></div>
+        <div class="d-flex align-items-center gap-2">
+            <span id="progressstart">start</span>
+            <div class="progress flex-grow-1" style="height: 40px; ">
+                <div id="progressbar" class="progress-bar" style="width: 100%; background-color: blue;">
+                </div>
+            </div>
+            <span id="progressend">end</span>
         </div>
     </div>
     <script src="lesson_progress.js"></script>
