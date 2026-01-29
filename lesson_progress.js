@@ -17,16 +17,31 @@ function stopTicking(){
     changeBarColor("grey")
 }
 
+function startTicking(){
+    const error = validateData()
+    console.log('Error:',error)
+    if (error){
+        alert(error);
+        changeBarColor("grey");
+        return;
+    }
+
+    progressStart.textContent = startTime.value
+    progressEnd.textContent = endTime.value
+    changeBarColor("blue")
+
+
+    updateProgressBar()
+    window.intervalID = setInterval(updateProgressBar,1000)
+}
+
 function changeBarColor(color){
     progressBar.style.backgroundColor = color;
 }
 
-function startTicking(){
-    progressStart.textContent = startTime.value
-    progressEnd.textContent = endTime.value
-    changeBarColor("blue")
-    updateProgressBar()
-    window.intervalID = setInterval(updateProgressBar,1000)
+function lessonFinished(){
+    clearInterval(intervalID)
+    changeBarColor("green")
 }
 
 function timeToMinutes(time) {
@@ -36,16 +51,12 @@ function timeToMinutes(time) {
 }
 
 function updateProgressBar(){
-    const error = validateData()
-    console.log('Error:',error)
-    if (error){
-        alert(error);
-        stopTicking();
-        return;
-    }
     percentageProgress = percentageCompleted() + "%"
     console.log('Percentage calculated:',percentageProgress)
     progressBar.style.width = percentageProgress
+    if (percentageCompleted() >= 100) {
+        lessonFinished()
+    }
 }
 
 function currentTime(){
