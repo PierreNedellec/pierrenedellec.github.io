@@ -1,0 +1,39 @@
+@font-face{
+    font-family: "Malyin";
+    src: url("fonts/Malyin.ttf");
+}
+
+@font-face{
+    font-family: "GreaterTheory";
+    src: url(fonts/GreaterTheory.otf);
+}
+
+@font-face{
+    font-family: "CocoGothic";
+    src: url(fonts/Coco-Gothic-Regular-trial.ttf);
+}
+
+@font-face{
+    font-family: "QuoteBaby";
+    src: url(fonts/Quote\ Baby.otf);
+}
+
+@font-face{
+    font-family: "StoryScript";
+    src: url(fonts/StoryScript-Regular.ttf);
+}
+
+h1{
+    font-family: "QuoteBaby";
+    font-size: 600%;
+}
+
+h2{
+    font-family: "QuoteBaby";
+    font-size: 300%;
+}
+
+h3{
+    font-family: "StoryScript";
+    font-size: 400%;
+}
