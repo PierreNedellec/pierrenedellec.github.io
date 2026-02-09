@@ -38,6 +38,12 @@ p{
     color: white;
 }
 
+strong{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 100%;
+    color: white;
+}
+
 body{
     width: 100%;
     background-color: black;
