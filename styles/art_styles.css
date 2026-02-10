@@ -1,0 +1,55 @@
+
+@font-face {
+    font-family: StoryScript;
+    src: url(/styles/fonts/StoryScript-Regular.ttf);
+}
+
+@font-face {
+    font-family: Limelight;
+    src: url(/styles/fonts/Limelight-Regular.ttf);
+}
+
+h1{
+    font-family: Limelight;
+    color: black;
+
+}
+
+h2{
+    font-family: Limelight;
+    color: black;
+}
+
+h3{
+    font-family: Limelight;
+    color: black;
+}
+
+h4{
+    font-family: StoryScript;
+    color: black;
+}
+
+h5{
+    font-family: StoryScript;
+    color: black;
+}
+
+h6{
+    font-family: StoryScript;
+    color: black;
+}
+
+
+p{
+    font-family: StoryScript;
+    font-size: 180%;
+    color: black;
+}
+
+
+body{
+    width: 100%;
+    background-color: black;
+}
+

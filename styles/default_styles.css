@@ -1,4 +1,13 @@
 
+@font-face {
+    font-family: StoryScript;
+    src: url(/styles/fonts/StoryScript-Regular.ttf);
+}
+
+@font-face {
+    font-family: Limelight;
+    src: url(/styles/fonts/Limelight-Regular.ttf);
+}
 
 h1{
     font-family: Impact, sans-serif;
