@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Viking writing</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="../styles/default_styles.css" rel="stylesheet">
+    <link href="../styles/viking_translator.css" rel="stylesheet">
+</head>
+
+<body style="background-color: rgb(98, 98, 98);">
+    <h1 style="font-size: 500%;" class="text-center">
+        Write like a Viking
+    </h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-sm-10">
+            <p>English:</p>
+            <textarea id="englishText" style="width: 100%; height: 50%"></textarea>
+            <p>Vikish:</p>
+            <textarea id="vikingText"  style="width: 100%; height: 50%;"></textarea>
+            <button id="translateBtn">Translate</button>
+        </div>
+    </div>
+    <script src="viking_translator.js"></script>
+
+</body>
