@@ -1,36 +1,43 @@
-const translateBtn = document.getElementById("translateBtn")
+const translateEnglishBtn = document.getElementById("translateEnglishBtn")
+const translateVikingBtn = document.getElementById('translateVikingBtn')
+const resetBtn = document.getElementById('resetBtn')
 const englishText = document.getElementById("englishText")
 const vikingText = document.getElementById("vikingText")
 
-translateBtn.addEventListener('click',translate)
+translateEnglishBtn.addEventListener('click',translateEnglishToViking)
+translateVikingBtn.addEventListener('click',translateVikingToEnglish)
+resetBtn.addEventListener('click', ()=>{
+    englishText.value = '';
+    vikingText.value = '';
+})
 
-function translate(){
-    const letters = englishText.value.toLowerCase().split("")
-    let newText = ''
-    for (let i=0; i<letters.length; i++){
-        newText += translator_alphabet[letters[i]]
+
+function reverseDict(dict){
+    reversed = {}
+    for (const key in dict){
+        const val = dict[key]
+        reversed[val] = key
     }
-    vikingText.value = newText
+    return reversed
 }
 
-//for now only translates form english to viking.
-const translator_alphabet = {
-  a: "ᚾ",
+const englishToViking = {
+  a: "ᚦ",
   b: "ᛉ",
   c: "ᛊ",
-  d: "ᚦ",
+  d: "ᚾ",
   e: "ᛗ",
   f: "ᛒ",
   g: "ᚱ",
-  h: "ᚺ",
-  i: "ᛞ",
+  h: "ᛈ",
+  i: "ᛡ",
   j: "ᚨ",
-  k: "ᛡ",
+  k: "ᛞ",
   l: "ᛏ",
   m: "ᚢ",
   n: "ᛋ",
   o: "ᚹ",
-  p: "ᛈ",
+  p: "ᚺ",
   q: "ᛇ",
   r: "ᚷ",
   s: "ᛖ",
@@ -43,5 +50,27 @@ const translator_alphabet = {
   z: "ᚾ",
   " ":" "
 };
+
+const vikingToEnglish = reverseDict(englishToViking)
+
+function translateEnglishToViking(){
+    console.log('e to v called ')
+    const letters = englishText.value.toLowerCase().split("")
+    let newText = ''
+    for (let i=0; i<letters.length; i++){
+        newText += englishToViking[letters[i]]
+    }
+    vikingText.value = newText
+}
+
+function translateVikingToEnglish(){
+    const letters = vikingText.value.toLowerCase().split("")
+    let newText = ''
+    for (let i=0; i<letters.length; i++){
+        newText += vikingToEnglish[letters[i]]
+    }
+    englishText.value = newText
+}
+
 
 
