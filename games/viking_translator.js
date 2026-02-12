@@ -25,7 +25,7 @@ const englishToViking = {
   a: "ᚦ",
   b: "ᛉ",
   c: "ᛊ",
-  d: "ᚾ",
+  d: "ᛑ",
   e: "ᛗ",
   f: "ᛒ",
   g: "ᚱ",
@@ -37,7 +37,7 @@ const englishToViking = {
   m: "ᚢ",
   n: "ᛋ",
   o: "ᚹ",
-  p: "ᚺ",
+  p: "ᛯ",
   q: "ᛇ",
   r: "ᚷ",
   s: "ᛖ",
@@ -58,7 +58,13 @@ function translateEnglishToViking(){
     const letters = englishText.value.toLowerCase().split("")
     let newText = ''
     for (let i=0; i<letters.length; i++){
-        newText += englishToViking[letters[i]]
+        if (! englishToViking[letters[i]]){
+            newText += letters[i]
+        }
+        else {
+            newText += englishToViking[letters[i]]
+        }
+        
     }
     vikingText.value = newText
 }
@@ -67,7 +73,13 @@ function translateVikingToEnglish(){
     const letters = vikingText.value.toLowerCase().split("")
     let newText = ''
     for (let i=0; i<letters.length; i++){
-        newText += vikingToEnglish[letters[i]]
+        if (! vikingToEnglish[letters[i]]){
+            newText += letters[i]
+        }
+        else {
+            newText += vikingToEnglish[letters[i]]
+        }
+        
     }
     englishText.value = newText
 }

@@ -1,3 +1,15 @@
 textarea{
     resize: none;
 }
+
+a:link{
+    color: orange
+}
+
+a:visited{
+    color: yellow;
+}
+
+a:active{
+    color: red
+}
