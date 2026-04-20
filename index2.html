@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pierre Nedellec</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f7f7f7; /* page background */
+      color: #111;
+      line-height: 1.6;
+    }
+
+    .main-container {
+      max-width: 800px;
+      margin: 60px auto;
+      background: #ffffff; /* slightly pops */
+      padding: 50px;
+      border-radius: 12px;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: 1.4rem;
+      margin-top: 50px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+      border-bottom: 1px solid #ccc;
+    }
+
+    a:hover {
+      border-bottom: 1px solid #000;
+    }
+
+    .profile-img {
+    width: 180px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px; /* subtle, not circular */
+    }
+    .header {
+    display: flex;
+    align-items: flex-start; /* aligns text better with taller image */
+    gap: 30px;
+    margin-bottom: 20px;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+
+    <!-- Header -->
+    <div class="header">
+      <img src="styles/images/Pierre_website_photo.jpg" alt="Your Photo" class="profile-img">
+      <div>
+        <h1>Pierre Nedellec</h1>
+        <p>
+          Short description about who you are. For example:
+          “Student interested in maths, problem solving, and building useful things.”
+        </p>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section">
+      <h2>Projects</h2>
+      <ul class="list-unstyled">
+        <li><a href="#">Project One</a> — short description</li>
+        <li><a href="#">Project Two</a> — short description</li>
+        <li><a href="#">Project Three</a> — short description</li>
+      </ul>
+    </div>
+
+    <!-- Articles -->
+    <div class="section">
+      <h2>Articles</h2>
+      <ul class="list-unstyled">
+        <li><a href="#">Article Title One</a></li>
+        <li><a href="#">Article Title Two</a></li>
+        <li><a href="#">Article Title Three</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>
