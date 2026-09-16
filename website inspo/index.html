@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>your-name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:opsz,wght@6..72,300..600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/site.css" rel="stylesheet">
+</head>
+<body>
+<div class="container site py-4 pb-5">
+  <!-- ================= HEADER (same on every page) ================= -->
+  <header class="d-flex flex-wrap justify-content-between align-items-center gap-3 pb-3 mb-4 border-bottom">
+    <div class="dim" style="font-size:0.75rem; letter-spacing:0.08em;">~/your-name</div>
+    <nav class="site-nav d-flex flex-wrap" style="gap:0.25rem;">
+      <a href="index.html" class="here">home</a>
+      <a href="writing.html">writing</a>
+      <a href="projects.html">projects</a>
+      <a href="side-quests.html">side-quests</a>
+      <a href="cv.html">cv</a>
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </header>
+
+  <main class="d-flex flex-column gap-4">
+
+    <!-- intro: portrait + name + one paragraph -->
+    <div class="d-flex flex-wrap gap-4 align-items-start">
+      <div class="shot flex-shrink-0" style="width:150px; height:186px;">portrait.jpg</div>
+      <div class="flex-grow-1" style="min-width:260px;">
+        <div class="accent mb-2" style="font-size:2.5rem; line-height:1.1; font-weight:500;">your-name<span class="cursor">_</span></div>
+        <p class="mb-2" style="color:#b3b1a2; max-width:560px;">student, generalist, chronic starter of things. economics on paper; writing, small software and photography in practice. everything below is real and mostly finished.</p>
+        <div class="label">open to internships &middot; summer 2027</div>
+      </div>
+    </div>
+
+    <hr class="border-top m-0">
+
+    <!-- the six doors. two columns on desktop, one on mobile -->
+    <div class="row g-0 row-cols-1 row-cols-md-2">
+      <div class="col"><a class="dir-row" href="writing.html"><span class="num">01</span><span class="flex-grow-1">writing/</span><span class="dim" style="font-size:0.75rem;">6 essays</span></a></div>
+      <div class="col"><a class="dir-row" href="cv.html"><span class="num">04</span><span class="flex-grow-1">cv</span><span class="dim" style="font-size:0.75rem;">one page</span></a></div>
+      <div class="col"><a class="dir-row" href="projects.html"><span class="num">02</span><span class="flex-grow-1">projects/</span><span class="dim" style="font-size:0.75rem;">4 write-ups</span></a></div>
+      <div class="col"><a class="dir-row" href="about.html"><span class="num">05</span><span class="flex-grow-1">about</span><span class="dim" style="font-size:0.75rem;">longer</span></a></div>
+      <div class="col"><a class="dir-row" href="side-quests.html"><span class="num">03</span><span class="flex-grow-1">side-quests/</span><span class="dim" style="font-size:0.75rem;">9 things</span></a></div>
+      <div class="col"><a class="dir-row" href="contact.html"><span class="num">06</span><span class="flex-grow-1">contact</span><span class="dim" style="font-size:0.75rem;">email</span></a></div>
+    </div>
+
+    <hr class="border-top m-0">
+
+    <!-- recent: add a line here whenever you publish something -->
+    <div class="d-flex flex-column gap-2">
+      <span class="label">recent</span>
+      <a class="d-flex flex-wrap text-decoration-none" style="gap:0.5rem 1.125rem; font-size:0.875rem;" href="writing-bad-on-purpose.html"><span class="dim flex-shrink-0" style="width:6rem;">2026-09-02</span><span class="flex-grow-1">on being bad at things on purpose</span><span class="dim" style="font-size:0.75rem;">essay</span></a>
+      <a class="d-flex flex-wrap text-decoration-none" style="gap:0.5rem 1.125rem; font-size:0.875rem;" href="project-bus-scraper.html"><span class="dim flex-shrink-0" style="width:6rem;">2026-08-14</span><span class="flex-grow-1">a bus-timetable scraper nobody asked for</span><span class="dim" style="font-size:0.75rem;">project</span></a>
+      <a class="d-flex flex-wrap text-decoration-none" style="gap:0.5rem 1.125rem; font-size:0.875rem;" href="writing-bad-on-purpose.html"><span class="dim flex-shrink-0" style="width:6rem;">2026-07-30</span><span class="flex-grow-1">three months of shooting only car parks</span><span class="dim" style="font-size:0.75rem;">essay</span></a>
+    </div>
+
+  </main>
+
+  <!-- ================= FOOTER (same on every page) ================= -->
+  <footer class="site-footer border-top pt-3 mt-5 d-flex flex-wrap justify-content-between label">
+    <span>your-name &mdash; built by hand, 2026</span>
+    <a href="index.html" class="dim">back to index</a>
+  </footer>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
