@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>spotify playlist timer — pierre-nedellec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:opsz,wght@6..72,300..600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/site.css" rel="stylesheet">
+</head>
+<body>
+<div class="container site py-4 pb-5">
+  <!-- ================= HEADER (same on every page) ================= -->
+  <header class="d-flex flex-wrap justify-content-between align-items-center gap-3 pb-3 mb-4 border-bottom">
+    <div class="dim" style="font-size:0.75rem; letter-spacing:0.08em;">~/pierre-nedellec/projects/spotify-playlist-timer</div>
+    <nav class="site-nav d-flex flex-wrap" style="gap:0.25rem;">
+      <a href="../index.html">home</a>
+      <a href="../writing.html">writing</a>
+      <a href="../projects.html" class="here">projects</a>
+      <a href="../side-quests.html">side-quests</a>
+      <a href="../cv.html">cv</a>
+      <a href="../about.html">about</a>
+      <a href="../contact.html">contact</a>
+    </nav>
+  </header>
+
+  <main class="d-flex flex-column gap-4">
+    <a href="projects.html" class="dim" style="font-size:0.75rem;">&larr; projects/</a>
+
+    <div style="max-width:680px;">
+      <div class="dim mb-2" style="font-size:0.75rem; letter-spacing:0.08em;">2026 &middot; python, spotify api, pandas, pytest</div>
+      <h1 class="mb-2" style="font-size:1.875rem; line-height:1.25; font-weight:500; color:#e7e5d8;">A Spotify playlist timed to the second</h1>
+      <p class="mb-0" style="color:#b3b1a2;">Four versions of one algorithm, and a benchmark to compare their performance.</p>
+    </div>
+
+    <img class="w-100 border" src="../assets/spotify-playlist-timer/demo.gif" alt="The program asking for a length and genre in the terminal, then the finished 30-minute playlist in Spotify">
+
+    <!-- the facts strip -->
+    <div class="row row-cols-1 row-cols-sm-3 g-4 border-top border-bottom py-3">
+      <div class="col d-flex flex-column"><span class="label">role</span><span>built all of it, alone</span></div>
+      <div class="col d-flex flex-column"><span class="label">span</span><span>four days, september 2026</span></div>
+      <div class="col d-flex flex-column"><span class="label">outcome</span><span>4 algorithms, 600 benchmark runs</span></div>
+    </div>
+
+    <!-- numbered sections -->
+    <div class="d-flex flex-column gap-4" style="max-width:680px;">
+      <section>
+        <h2 class="accent label mb-2">01 &mdash; Introduction</h2>
+        <p class="prose mb-0">Ask for 56 minutes of house music, and this program will create such a playlist in less than a second. Behind this program lies a classic problem: the subset-sum problem, for which I had to build four versions of my algorithm before solving it quickly and reliably. This was my first proper project: easily clonable, with tests and a licence. I even benchmarked all four versions of my algorithm to analyse the strengths and weaknesses of each.</p>
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">02 &mdash; The problem</h2>
+        <p class="prose mb-0">Given a set of tracks, find a subset whose durations add up to a target. This is the subset-sum problem.</p>
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">03 &mdash; Version 1: the heuristic approach</h2>
+        <p class="prose mb-3">My first idea was simple: I would fill a prototype playlist until it overshot the target duration. I would then consider the first track among the tracks I didn’t use in my playlist, and swap it with a track in my current prototyped playlist. I would swap the track that would bring the duration of my playlist closest to the target duration. Repeating this process got me good results, but it was not always reliable.</p>
+        <img class="w-100 border mb-3" src="../assets/spotify-playlist-timer/heuristic.png" alt="Diagram of version 1: tracks are added until the playlist passes the 20-minute target, then one track is swapped for the next unused one, bringing the total to 20:10">
+        <p class="prose mb-0">By running a benchmark with my four algorithms, I found that version 1 failed to produce a playlist within the 20-second cut-off in 26% of cases. When it did finish, it was by far the fastest (typically under a millisecond) and hit the target exactly. Its failures clustered on short targets: a 5-minute playlist only holds two or three songs, which leaves too little space for the algorithm to fine-tune by swapping, resulting in the algorithm getting stuck in a loop, never converging on the target time.</p>
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">04 &mdash; Version 2: brute force approach</h2>
+        <p class="prose mb-3">The brute-force technique is to compute all possible playlists and select the one that matches the target duration or the one closest.</p>
+        <p class="prose mb-3">This failed miserably and it’s easy to see why. There are 2<sup>n</sup> subsets of a set of length n. With 30 tracks, that’s already more than one billion possibilities.</p>
+        <p class="prose mb-0">The timeout rate for version 2 is extreme. It timed out in 63% of runs, and for a 60-minute playlist it failed at every size from 30 tracks upwards. I actually built this version by mistake while trying to build the dynamic programming algorithm. The only difference between version 2 and 3 is that two playlists that both last 700 seconds are kept in version 2 whereas only one is kept in version 3. It is almost totally useless and serves more as a demonstration rather than as an algorithm with any genuine use.</p>
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">05 &mdash; Version 3: Dynamic programming</h2>
+        <p class="prose mb-3">If a 550-second playlist is reachable and the next track available is 190 seconds, then a 740-second playlist is reachable. By using this principle, I could bulid an index of all reachable playlist durations.</p>
+        <p class="prose mb-0">This works by keeping a dictionary with one entry for each reachable playlist time. The runtime is limited because there are only so many whole-second durations below the target. For that reason, the runtime is approximately O(#tracks x target). This only works when the target is relatively small, and as the target rarely goes into the tens of thousands, this was the case in this problem.</p>
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">06 &mdash; Version 4: fixing a hidden bug</h2>
+        <p class="prose mb-3">There was a bug in the first version of the dynamic programming algorithm. For each new track, version 3 loops over a copy of the dictionary’s keys but reads the playlists from the live dictionary. Suppose that, earlier in the same pass, the 1,200-second entry was overwritten with a playlist that already contains the current track. When the loop reaches 1,200 seconds, it sees the track is already used and skips it. But the old 1,200-second playlist, which didn’t contain that track, could have been extended, so that new total is lost.</p>
+        <p class="prose mb-3">The fix was to take a snapshot of the whole dictionary, keys and playlists, before adding each track.</p>
+        <p class="prose mb-3">The bug only shows when tracks are scarce. With hundreds of tracks, every total can be reached in so many ways that losing one route doesn’t matter. Ordinary use never revealed it. However, the benchmark showed that in every test where versions 3 and 4 gave different answers, version 4 was closer to the target, in one case by more than 4 minutes.</p>
+        <p class="prose mb-0">Version 4 also skips totals it has already reached instead of rebuilding them, which made it about 3× faster once there are 30 or more tracks, and it shuffles the tracks first, so the same request gives a different playlist each time. Versions 3 and 4 were the only ones to finish all 150 of their benchmark runs.</p>
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">07 &mdash; Results</h2>
+        <p class="prose mb-3">In the benchmark, each version was run 150 times. Version 1 failed to produce a playlist within the 20-second cut-off in 26% of its runs, version 2 in 63%, and versions 3 and 4 in none. The chart below shows how long each version took to build a 60-minute playlist as the number of candidate tracks grew.</p>
+        <img class="w-100 border" src="../assets/spotify-playlist-timer/benchmark.png" alt="Chart of median runtime against number of candidate tracks for a 60-minute playlist. Version 2 times out from 30 tracks; version 4 stays about three times faster than version 3.">
+      </section>
+
+      <section>
+        <h2 class="accent label mb-2">08 &mdash; What I learned</h2>
+        <p class="prose mb-3">Building this project exposed me to many ideas which are key to building apps. I made many first-time mistakes: I published my .env file to GitHub, which contained my Spotify client secret. I fixed this security flaw by deleting the .env from the version history of the project, and rotating my secret. This mistake taught me the proper procedure for using APIs, which I’ve rarely had the chance to use in the past.</p>
+        <p class="prose mb-3">I wanted this project to be able to be used by others. Therefore, I added an MIT licence to my project for the first time, and wrote a detailed README to allow it to be cloned and used by others.</p>
+        <p class="prose mb-0">The most useful thing about this project was being able to measure and pit the different versions of my algorithm against each other. I enjoyed being able to rate my algorithm’s performance, especially as optimising runtime is something I’ve become increasingly interested in. Testing each version on its own told me whether it worked; measuring them against each other showed where each one broke.</p>
+      </section>
+    </div>
+
+    <div class="border-top pt-3 d-flex flex-wrap gap-3" style="font-size:0.8125rem;">
+      <a href="../projects.html">all projects</a>
+      <a href="https://github.com/PierreNedellec/Spotify-timer-playlist">source on github</a>
+    </div>
+  </main>
+
+  <!-- ================= FOOTER (same on every page) ================= -->
+  <footer class="site-footer border-top pt-3 mt-5 d-flex flex-wrap justify-content-between label">
+    <span>pierre nedellec, last updated 21/09/2026</span>
+    <a href="index.html" class="dim">back to index</a>
+  </footer>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
