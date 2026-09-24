@@ -1,2 +1,2 @@
 # pierrenedellec.github.io
-Website collection of all the ways to encrypt or hide messages.
+Personal website of Pierre Nedellec. Hand-written HTML, Bootstrap 5 for the grid, custom theme in `assets/site.css`. Hosted on GitHub Pages.
